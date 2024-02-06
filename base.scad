@@ -60,21 +60,6 @@ module base1_plot() {
     }
 }
 
-module part1_plot() {
-    difference() {
-        base1_plot();
-        {
-            schraubenloecher_plot();
-            circle(d = ls_d);
-        }
-    }
-}
-
-module part1() {
-    linear_extrude(case_thickness)
-        part1_plot();
-}
-
 // 2D Plot des Gehäuseinneren ohne Löcher:
 module base2_plot() {
     size = case_size - 2 * case_thickness;
@@ -113,31 +98,3 @@ module schraubenhuelsen_plot() {
     }
 }
 
-module part2() {
-    union() {
-        union() {
-            linear_extrude(case_h + delta)
-                base2_plot();
-            translate([0, 0, ls_alpha])
-                linear_extrude(case_h - ls_alpha)
-                    schraubenhuelsen_plot();
-        }
-        translate([0, 0, case_h]) {
-            linear_extrude(case_thickness)
-                base1_plot();
-        }
-    }
-}
-
-module print1() {
-    part1();
-}
-
-module print2() {
-    translate([0, 0, case_h + case_thickness])
-        rotate([180, 0, 0])
-            part2();
-}
-
-//print1();
-print2();
