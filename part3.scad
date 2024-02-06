@@ -1,8 +1,8 @@
 include <base.scad>
 
 height   =  2.50;
-n_holes  = 18;
-hole_fac =  0.60; // 0..1
+n_holes  = 32;
+hole_fac =  0.70; // 0..1
 d_hole   = ls_d / n_holes * hole_fac;
 
 module part3_base() {
@@ -35,8 +35,8 @@ module holes_plot(d, n) {
                (x_stroke < x_stroke_max))
            { 
                 translate([x_stroke * d / 2, y])
-                    //circle(d = d_hole);
-                    square(size = d_hole, center = true);
+                    circle(d = d_hole);
+                    //square(size = d_hole, center = true);
            }
         }
     } 
